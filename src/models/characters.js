@@ -6,17 +6,11 @@ const Characters = function (url) {
   this.characters = [];
 };
 
-// Characters.prototype.getData = function () {
-//   const request = new RequestHelper(this.url);
-//   request.get(data => this.handleData(data));
-// };
-
 Characters.prototype.getData = function () {
   const request = new RequestHelper(this.url);
   const handleRequestComplete = (responseData) => {
     this.characters = responseData;
     const uniqueHouses = this.getUniqueHouses();
-    // PubSub.publish('Munros:munros-data-ready', this.munros);
     PubSub.publish('Characters:characters-houses-ready', uniqueHouses);
   };
   request.get()
@@ -31,12 +25,6 @@ Characters.prototype.bindEvents = function () {
   });
 };
 
-// Characters.prototype.handleData = function (data) {
-//   this.munros = data;
-//   PubSub.publish('Munros:munros-data-ready', this.munros);
-// };
-//
-//
 Characters.prototype.getUniqueHouses = function () {
   const allHouses = this.characters.map((character) =>{
     return character.house;

@@ -6,9 +6,6 @@ const CharactersView = function (selectElement, dropElement) {
 };
 
 CharactersView.prototype.bindEvents = function () {
-  // PubSub.subscribe('Munros:munros-data-ready', (evt) => {
-  //   // this.populate(evt.detail)
-  // });
   PubSub.subscribe('Characters:characters-houses-ready', (evt) => {
     this.populateListOfHouses(evt.detail)
   });
@@ -21,13 +18,11 @@ CharactersView.prototype.bindEvents = function () {
     const selectedIndex = evt.target.value;
     PubSub.publish('SelectView:change', selectedIndex);
   })
-
 };
 
 
 CharactersView.prototype.populate = function (characters) {
   this.element.innerHTML= " "
-  console.log(characters);
   characters.forEach((character) => {
     const characterName = document.createElement('h4');
     characterName.textContent = character.name;
