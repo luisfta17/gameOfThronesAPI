@@ -24,12 +24,12 @@ Characters.prototype.getData = function () {
     .catch(error => console.error(error));
 }
 
-// Characters.prototype.bindEvents = function () {
-//   PubSub.subscribe('SelectView:change', (evt) => {
-//     const munroes = this.getMunroByRegion(evt.detail);
-//     PubSub.publish('Munros:munros-region-selected-ready', munroes);
-//   });
-// };
+Characters.prototype.bindEvents = function () {
+  PubSub.subscribe('SelectView:change', (evt) => {
+    const characters = this.getCharacterByHouse(evt.detail);
+    PubSub.publish('Characters:character-house-selected-ready', characters);
+  });
+};
 
 // Characters.prototype.handleData = function (data) {
 //   this.munros = data;
@@ -47,15 +47,15 @@ Characters.prototype.getUniqueHouses = function () {
   return uniqueArray;
 };
 
-// Characters.prototype.getCharacterByHouse = function (region) {
-//   const arrayOfMunros = [];
-//   const uniqueArray = this.munros.forEach((munro) => {
-//       if (munro.region == region){
-//         arrayOfMunros.push(munro)
-//       }
-//   })
-//   return arrayOfMunros;
-// };
+Characters.prototype.getCharacterByHouse = function (house) {
+  const arrayOfCharacters = [];
+  const uniqueArray = this.characters.forEach((character) => {
+      if (character.house == house){
+        arrayOfCharacters.push(character)
+      }
+  })
+  return arrayOfCharacters;
+};
 
 
 

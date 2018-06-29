@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const characterInfo = document.querySelector('#characters');
   const characters = new Characters('https://api.got.show/api/characters/')
   characters.getData();
+  characters.bindEvents();
   const characterView = new CharactersView(characterInfo, dropDown);
   characterView.bindEvents();
 })
